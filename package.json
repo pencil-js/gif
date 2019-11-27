@@ -1,0 +1,61 @@
+{
+    "name": "@pencil.js/gif",
+    "version": "0.1.0",
+    "description": "Render scene as GIF",
+    "main": "index.js",
+    "files": [
+        "dist/"
+    ],
+    "unpkg": "dist/gif.min.js",
+    "jsdelivr": "dist/gif.min.js",
+    "scripts": {
+        "lint": "eslint **/*.js",
+        "test": "ava",
+        "play": "webpack --mode=development --watch",
+        "build": "webpack --mode=production",
+        "prepublishOnly": "npm run build"
+    },
+    "publishConfig": {
+        "access": "public"
+    },
+    "ava": {
+        "require": [
+            "esm",
+            "@pencil.js/test-environment"
+        ]
+    },
+    "eslintConfig": {
+        "extends": "@gmartigny/eslint-config"
+    },
+    "keywords": [
+        "pencil.js",
+        "GIF",
+        "image",
+        "animation"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/pencil-js/gif.git"
+    },
+    "author": "GMartigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/pencil-js/gif/issues"
+    },
+    "homepage": "https://github.com/pencil-js/gif#readme",
+    "peerDependencies": {
+        "pencil.js": "> 1"
+    },
+    "devDependencies": {
+        "@gmartigny/eslint-config": "^1.3.1",
+        "@pencil.js/test-environment": "^1.1.0",
+        "ava": "^2.4.0",
+        "eslint": "^6.7.1",
+        "esm": "^3.2.25",
+        "webpack": "^4.41.2",
+        "webpack-cli": "^3.3.10"
+    },
+    "dependencies": {
+        "@pencil.js/canvas-gif-encoder": "1.0.0"
+    }
+}
