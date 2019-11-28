@@ -1,5 +1,3 @@
-import Gif from "@pencil.js/canvas-gif-encoder";
-
 const defaultOptions = {
     speed: 1,
 };
@@ -13,30 +11,51 @@ const defaultOptions = {
  * @param {OffscreenCanvas} offscreenCanvas - OffscreenCanvas or Scene coming from Pencil.js to be draw onto the GIF
  * @param {Number} nbFrames - Number of frame to render (Do not represent the exact number of frames on the create GIF)
  * @param {GIFOptions} options - Some options
- * @returns {HTMLImageElement}
+ * @returns {Promise<HTMLImageElement>}
  */
-export default (offscreenCanvas, nbFrames = 1, options = {}) => {
+export default async function (offscreenCanvas, nbFrames = 1, options = {}) {
+    const worker = new this.Worker("worker.js", {
+        type: "module",
+    });
+
+    const send = (action, ...args) => {
+        worker.postMessage({
+            action,
+            args,
+        });
+    };
+
     const userOptions = {
         ...defaultOptions,
         ...options,
     };
 
-    const { width, height } = offscreenCanvas;
-    const gif = new Gif(width, height, userOptions);
-    const delay = (1000 / 60) / userOptions.speed;
+    return new Promise((resolve) => {
+        worker.onmessage = ({ data }) => {
+            const blob = new window.Blob([data], {
+                type: "image/gif",
+            });
 
-    for (let i = 0; i < nbFrames; ++i) {
-        offscreenCanvas.render();
+            const image = new window.Image();
+            image.src = window.URL.createObjectURL(blob);
 
-        gif.addFrame(offscreenCanvas.ctx, delay);
-    }
+            resolve(image);
 
-    const blob = new window.Blob([gif.end()], {
-        type: "image/gif",
+            worker.terminate();
+        };
+
+        const { width, height } = offscreenCanvas;
+
+        send("start", width, height, userOptions);
+
+        const delay = (1000 / 60) / userOptions.speed;
+
+        for (let i = 0; i < nbFrames; ++i) {
+            const data = offscreenCanvas.getImageData();
+
+            send("addFrame", data, delay);
+        }
+
+        send("end");
     });
-
-    const image = new window.Image();
-    image.src = window.URL.createObjectURL(blob);
-
-    return image;
-};
+}

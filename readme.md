@@ -89,6 +89,21 @@ You can also use all [`canvas-gif-encoder`'s options](https://github.com/pencil-
 |speed |`Number` |`1` |Rendering speed ratio (1 means ~60fps, 0.5 means ~30fps ...) |
 
 
+## Bundler
+
+This package is using `Worker` to offload the computation to a separate thread and not lock the browser.
+
+When using a web bundler like Webpack or Rollup,
+you should use a worker-loader plugin like [webpack `worker-loader`](https://github.com/webpack-contrib/worker-loader) or
+[rollup `worker-loader`](https://github.com/darionco/rollup-plugin-web-worker-loader).
+
+And then import the `web-export.js` file like so:
+
+```js
+import "@pencil.js/gif/web-export";
+```
+
+
 ## License
 
 [MIT](license)

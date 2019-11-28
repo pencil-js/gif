@@ -53,9 +53,10 @@
         "eslint": "^6.7.1",
         "esm": "^3.2.25",
         "webpack": "^4.41.2",
-        "webpack-cli": "^3.3.10"
+        "webpack-cli": "^3.3.10",
+        "worker-loader": "^2.0.0"
     },
     "dependencies": {
-        "@pencil.js/canvas-gif-encoder": "1.0.0"
+        "@pencil.js/canvas-gif-encoder": "^1.1.0"
     }
 }
