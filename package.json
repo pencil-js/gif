@@ -4,25 +4,19 @@
     "description": "Render scene as GIF",
     "main": "index.js",
     "files": [
-        "dist/"
+        "dist/",
+        "worker.js"
     ],
     "unpkg": "dist/gif.min.js",
     "jsdelivr": "dist/gif.min.js",
     "scripts": {
         "lint": "eslint **/*.js",
-        "test": "ava",
-        "play": "webpack --mode=development --watch",
-        "build": "webpack --mode=production",
+        "play": "webpack -d --watch",
+        "build": "webpack -p",
         "prepublishOnly": "npm run build"
     },
     "publishConfig": {
         "access": "public"
-    },
-    "ava": {
-        "require": [
-            "esm",
-            "@pencil.js/test-environment"
-        ]
     },
     "eslintConfig": {
         "extends": "@gmartigny/eslint-config"
@@ -48,11 +42,8 @@
     },
     "devDependencies": {
         "@gmartigny/eslint-config": "^1.4.2",
-        "@pencil.js/test-environment": "^1.2.0",
         "@purtuga/esm-webpack-plugin": "^1.2.1",
-        "ava": "^3.5.0",
         "eslint": "^6.8.0",
-        "esm": "^3.2.25",
         "webpack": "^4.42.0",
         "webpack-cli": "^3.3.11",
         "worker-loader": "^2.0.0"
