@@ -1,3 +1,6 @@
+// eslint-disable-next-line import/default
+import MyWorker from "./worker.js";
+
 const defaultOptions = {
     speed: 1,
 };
@@ -14,7 +17,7 @@ const defaultOptions = {
  * @returns {Promise<HTMLImageElement>}
  */
 export default async function (offscreenCanvas, nbFrames = 1, options = {}) {
-    const worker = new this.Worker("worker.js", {
+    const worker = new MyWorker("./worker.js", {
         type: "module",
     });
 

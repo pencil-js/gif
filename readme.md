@@ -11,19 +11,26 @@ Turn any Pencil.js scene into an animated GIF.
 
 
 ## [CDN](https://developer.mozilla.org/docs/Glossaire/CDN "Content Delivery Network")
-You can download this directly from a CDN. Be sure to add the `<script>` tag after the Pencil.js's one.
-The `.gif()` function will be added to the `Pencil` namespace.
+You can download this directly from a CDN.
 
+
+### ESM
 ```html
-<!--Pencil.js should come first-->
-<script src="https://unpkg.com/pencil.js"></script>
+<script type="module">
+    import gif from "https://unpkg.com/@pencil.js/gif/dist/gif.esm.js";
 
+    gif();
+</script>
+```
+
+### ES5
+```html
 <script src="https://unpkg.com/@pencil.js/gif"></script>
 <!-- or -->
 <script src="https://cdn.jsdelivr.net/npm/@pencil.js/gif"></script>
 
 <script>
-    console.log(Pencil.gif);
+    gif();
 </script>
 ```
 
@@ -96,12 +103,6 @@ This package is using `Worker` to offload the computation to a separate thread a
 When using a web bundler like Webpack or Rollup,
 you should use a worker-loader plugin like [webpack `worker-loader`](https://github.com/webpack-contrib/worker-loader) or
 [rollup `worker-loader`](https://github.com/darionco/rollup-plugin-web-worker-loader).
-
-And then import the `web-export.js` file like so:
-
-```js
-import "@pencil.js/gif/web-export";
-```
 
 
 ## License
