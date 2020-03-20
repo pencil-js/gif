@@ -46,35 +46,7 @@ gif(<OffscreenCanvas>, <nbFrames>, <options>);
 
 ## Example
 
-```js
-import gif from "@pencil.js/gif";
-import { OffScreenCanvas, Square } from "pencil.js";
-
-const nbFrames = 100;
-
-// Create a new scene off-screen
-const width = 300;
-const height = 200;
-const scene = new OffScreenCanvas(width, height);
-
-// Create a square shape
-const size = 100;
-const square = new Square(scene.center, size, {
-    fill: "red",
-});
-
-// Make it spin
-square.on("draw", () => {
-    square.options.rotation = square.frameCount / nbFrames;
-});
-
-// Add it to the scene
-scene.add(square);
-
-// Turn the scene into an animated GIF
-const file = gif(scene, nbFrames);
-document.body.appendChild(file);
-```
+Check out the [examples directory](examples).
 
 
 ## Documentation

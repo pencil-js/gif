@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Example - Simple</title>
+</head>
+<body>
+<script src="https://unpkg.com/pencil.js"></script>
+<script src="../dist/gif.min.js"></script>
+<script>
+    // Extract OffScreenCanvas and Square from Pencil
+    const { OffScreenCanvas, Square } = Pencil;
+
+    // Number of frame to draw
+    const nbFrames = 100;
+
+    // Create a new OffScreenCanvas
+    const scene = new OffScreenCanvas(300, 200);
+
+    // Create a new Square et the center of the scene
+    const square = new Square(scene.center, 100, {
+        origin: "center",
+    });
+
+    scene
+        // Add the square to the scene
+        .add(square)
+        // Listen for draw events
+        .on("draw", () => {
+            // Increment rotation
+            square.options.rotation = scene.frameCount / nbFrames;
+        }, true);
+
+    // Generate the gif file and append it to the window
+    gif(scene, nbFrames).then((file) => {
+        document.body.appendChild(file);
+    });
+</script>
+</body>
+</html>
