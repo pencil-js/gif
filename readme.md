@@ -51,7 +51,7 @@ Check out the [examples directory](examples).
 
 ## Documentation
 
-### `gif(<scene>, <nbFrame>)`
+### `gif(<scene>, <nbFrame>, <options>)`
 Turn any Pencil.js scene into an animated GIF.
 
 | Name | Type | Default | Comment |
